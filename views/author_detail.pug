@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  h2 #{author.name}
+  ul
+    li Date of Birth: #{author.date_of_birth ? author.date_of_birth.toDateString() : 'Unknown'}
+    li Date of Death: #{author.date_of_death ? author.date_of_death.toDateString() : 'Alive'}
+
+  h3 Books by this Author
+  if books.length > 0
+    ul
+      each book in books
+        li
+          a(href=book.url) #{book.title}
+          br
+          small Summary: #{book.summary}
+  else
+    p No books available for this author.
