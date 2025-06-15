@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  h2 #{book.title}
+  ul
+    li Author: 
+      a(href=book.author.url) #{book.author.name}
+    li Summary: #{book.summary}
+    li ISBN: #{book.isbn}
+    li Genre(s): 
+      each genre in book.genre
+        span= genre.name + ' '
+    li Status:
+      ul
+        if book.bookinstances && book.bookinstances.length > 0
+          each instance in book.bookinstances
+            li
+              if instance.status === 'Available'
+                span(style="color: green") Available
+              else
+                span(style="color: red") Loaned until #{instance.due_back.toDateString()}
+        else
+          li No instances available

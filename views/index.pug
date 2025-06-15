@@ -2,4 +2,19 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  ul
+    each book in books
+      li
+        a(href=book.url) #{book.title} (#{book.author.name})
+        br
+        small Summary: #{book.summary}
+        br
+        small Genre(s): 
+          if book.genre.length > 0
+            each genre in book.genre
+              span= genre.name + ' '
+          else
+            span No genres specified
+        br
+        small ISBN: #{book.isbn}
+        hr
